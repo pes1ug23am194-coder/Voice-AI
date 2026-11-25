@@ -468,9 +468,11 @@ EXAMPLE:
       --smallest-key   sm_abc123
         """
     )
-    parser.add_argument("--elevenlabs-key", default=os.getenv("ELEVENLABS_API_KEY", "sk_77e37252edb63d1f3d4e1ed6d825084383729b541adde21d"))
-    parser.add_argument("--deepgram-key",   default=os.getenv("DEEPGRAM_API_KEY", "c77dfda5c009cc666a6105f4f3acd6ba85c5f6b2"))
-    parser.add_argument("--smallest-key",   default=os.getenv("SMALLEST_API_KEY", "sk_683c0ef1101d6890d58cdefc24022997"))
+    # API keys are read from the flag or the environment variable only.
+    # Never hardcode a key as a default here.
+    parser.add_argument("--elevenlabs-key", default=os.getenv("ELEVENLABS_API_KEY"))
+    parser.add_argument("--deepgram-key",   default=os.getenv("DEEPGRAM_API_KEY"))
+    parser.add_argument("--smallest-key",   default=os.getenv("SMALLEST_API_KEY"))
     parser.add_argument("--audio-dir",      default="./audio_cache",
                         help="Where to store generated WAV files (default: ./audio_cache)")
     parser.add_argument("--limit",  type=int, default=1000,
